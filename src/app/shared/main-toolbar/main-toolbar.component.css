@@ -1,0 +1,14 @@
+.toolbar-brand h2 {
+    margin-left: 5%;
+    font-family: 'Lobster', cursive;
+    font-size: 30px;
+}
+
+.brand-img {
+    display: block;
+    margin: auto;
+}
+
+.toolbar-date {
+    font-size: 18px;
+}

@@ -1,0 +1,21 @@
+.search-wrapper {
+    display: grid;
+    grid-gap: 1.5rem;
+}
+
+@media (min-width: 750px) {
+    .search-wrapper {
+        grid-template-columns: 30% 30% 10%;
+        grid-template-rows: 40px;
+        grid-gap: 1.5rem;
+        justify-content: space-evenly;
+    }
+}
+
+@media (max-width: 750px) {
+    .search-wrapper {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 25px;
+    }
+}

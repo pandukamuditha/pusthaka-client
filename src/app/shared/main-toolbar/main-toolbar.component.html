@@ -1,0 +1,19 @@
+<mat-toolbar id="main-toolbar" color="primary">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-3">
+        <div class="row toolbar-brand">
+          <div class="col-3">
+            <img class="brand-img" src="../assets/Book.png" width="60" height="30" alt="Pusthaka Logo">
+          </div>
+          <div class="col-7">
+            <h2>Pusthaka</h2>
+          </div>
+        </div>
+      </div>
+      <div class="toolbar-date col-sm-2 offset-sm-7">
+        {{ dateTime | date }}
+      </div>
+    </div>
+  </div>
+</mat-toolbar>

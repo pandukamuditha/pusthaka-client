@@ -1,0 +1,15 @@
+mat-card {
+    max-width: inherit;
+}
+
+mat-card img {
+    width: 5em;
+    height: 6em;
+}
+
+.wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, auto));
+    grid-auto-rows: minmax(150px, auto);
+    grid-gap: 1.5rem;
+}
