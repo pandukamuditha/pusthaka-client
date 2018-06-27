@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -12,6 +12,9 @@ import { NavComponent } from './shared/nav/nav.component';
 import { BookCatalogComponent } from './shared/book-catalog/book-catalog.component';
 import { NotFoundComponent } from './shared/not-found/not-found.component';
 import { BookSearchComponent } from './shared/book-search/book-search.component';
+import { LoginComponent } from './shared/login/login.component';
+import { FormsModule } from '@angular/forms';
+import { AuthInterceptor } from './services/auth/auth-interceptor';
 
 @NgModule({
   declarations: [
@@ -20,16 +23,24 @@ import { BookSearchComponent } from './shared/book-search/book-search.component'
     NavComponent,
     BookCatalogComponent,
     NotFoundComponent,
-    BookSearchComponent
+    BookSearchComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
+    FormsModule,
     BrowserAnimationsModule,
     MaterialComponentsModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

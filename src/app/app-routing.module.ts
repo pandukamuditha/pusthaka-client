@@ -3,12 +3,17 @@ import { Routes, RouterModule, Router } from '@angular/router';
 import { NotFoundComponent } from './shared/not-found/not-found.component';
 import { AppComponent } from './app.component';
 import { BookCatalogComponent } from './shared/book-catalog/book-catalog.component';
+import { LoginComponent } from './shared/login/login.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'catalog',
+    redirectTo: 'login',
     pathMatch: 'full'
+  },
+  {
+    path: 'login',
+    component: LoginComponent
   },
   {
     path: 'catalog',
@@ -22,7 +27,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, {enableTracing: true})
+    RouterModule.forRoot(routes)
   ],
   exports: [RouterModule]
 })
