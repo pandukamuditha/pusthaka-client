@@ -32,8 +32,6 @@ export class BookCatalogComponent implements OnInit {
   }
 
   search(query) {
-    console.log(query);
-    console.log(this.selectedCategory);
     this.bookService.getBooksBySearch(this.selectedCategory, query).subscribe(
       (books) => {
         this.books = books;

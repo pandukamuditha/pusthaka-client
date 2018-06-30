@@ -5,7 +5,7 @@
 <p *ngIf="error">{{ error.error }}</p>
 
 <div class="wrapper">
-  <mat-card *ngFor="let book of books">
+  <mat-card *ngFor="let book of books" [routerLink]="['../book', book._id]">
     <mat-card-title>
       {{ book.title }}
     </mat-card-title>

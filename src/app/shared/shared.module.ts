@@ -26,6 +26,7 @@ import { FormsModule } from '@angular/forms';
     BookSearchComponent
   ],
   exports: [
+    MaterialComponentsModule,
     MainToolbarComponent,
     NavComponent,
     LoginComponent,

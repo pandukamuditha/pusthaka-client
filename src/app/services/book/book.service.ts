@@ -13,7 +13,8 @@ export class BookService {
   constructor(private httpClient: HttpClient) { }
 
   getBook(id: string) {
-    return this.httpClient.get(baseUrl + id).pipe(
+    return this.httpClient.get<Book>(baseUrl + id).pipe(
+      retry(3)
     );
   }
 
@@ -36,7 +37,7 @@ export class BookService {
           query: searchQuery
         }
       }).pipe(
-
+        retry(5)
       );
   }
 }
