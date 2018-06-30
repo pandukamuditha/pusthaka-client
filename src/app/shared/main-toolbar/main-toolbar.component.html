@@ -11,8 +11,16 @@
           </div>
         </div>
       </div>
-      <div class="toolbar-date col-sm-2 offset-sm-7">
-        {{ dateTime | date }}
+      <div class="toolbar-date col-sm-3 offset-sm-6">
+        <div class="row justify-content-end">
+          <div class="col-sm-5">
+            {{ dateTime | date }}
+          </div>
+          <div class="col-sm-5" *ngIf="authService.isLoggedIn()">
+              <button mat-button (click)="authService.logout()">Logout</button>
+          </div>
+          <div class="col-sm-2"></div>
+        </div>
       </div>
     </div>
   </div>

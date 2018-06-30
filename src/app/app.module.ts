@@ -15,23 +15,18 @@ import { BookSearchComponent } from './shared/book-search/book-search.component'
 import { LoginComponent } from './shared/login/login.component';
 import { FormsModule } from '@angular/forms';
 import { AuthInterceptor } from './services/auth/auth-interceptor';
+import { PatronModule } from './patron/patron.module';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    MainToolbarComponent,
-    NavComponent,
-    BookCatalogComponent,
-    NotFoundComponent,
-    BookSearchComponent,
-    LoginComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
-    HttpClientModule,
-    FormsModule,
     BrowserAnimationsModule,
-    MaterialComponentsModule,
+    SharedModule,
+    PatronModule,
     AppRoutingModule
   ],
   providers: [

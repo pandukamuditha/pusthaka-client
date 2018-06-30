@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-main-toolbar',
@@ -8,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class MainToolbarComponent implements OnInit {
   public dateTime: any;
 
-  constructor() { }
+  constructor(public authService: AuthService) { }
 
   ngOnInit() {
     this.dateTime = Date.now();
