@@ -1,11 +1,14 @@
 <div class="search-wrapper">
   <mat-form-field>
-    <mat-select placeholder="Select Category">
-      <mat-option value="option">Option</mat-option>
+    <mat-select (valueChange)="changeCategory($event)" [value]="selectedCategory">
+      <mat-option value="all">All</mat-option>
+      <mat-option value="machine-learning">Machine Learning</mat-option>
+      <mat-option value="programming-languages">Programming Languages</mat-option>
+      <mat-option value="computer-graphics">Computer Graphics</mat-option>
     </mat-select>
   </mat-form-field>
   <mat-form-field>
-    <input matInput placeholder="Title, Author">
+    <input matInput placeholder="Title, Author" (input)="searchQuery=$event.target.value">
   </mat-form-field>
-  <button mat-raised-button>Search</button>
+  <button mat-raised-button (click)="search()">Search</button>
 </div>

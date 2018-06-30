@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { BooksService } from '../../services/books/books.service';
+import { BookService } from '../../services/book/book.service';
 import { Book } from '../../models/book';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-book-catalog',
@@ -8,15 +9,41 @@ import { Book } from '../../models/book';
   styleUrls: ['./book-catalog.component.css']
 })
 export class BookCatalogComponent implements OnInit {
-  array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-  book: Book;
+  books: Book[];
+  selectedCategory = 'all';
+  error: HttpErrorResponse;
 
-  constructor(private booksService: BooksService) { }
+  constructor(private bookService: BookService) { }
 
   ngOnInit() {
-    this.booksService.getBook().subscribe((data: Book) => {
-      this.book = data;
-    });
+    this.newReleases(this.selectedCategory);
+  }
+
+  newReleases(category: string) {
+    this.bookService.getNewReleases(category).subscribe(
+      (books) => { this.books = books; }
+    );
+  }
+
+  changeCategory($event) {
+    this.selectedCategory = $event;
+    this.error = null;
+    this.newReleases(this.selectedCategory);
+  }
+
+  search(query) {
+    console.log(query);
+    console.log(this.selectedCategory);
+    this.bookService.getBooksBySearch(this.selectedCategory, query).subscribe(
+      (books) => {
+        this.books = books;
+        this.error = null;
+      },
+      (err) => {
+        this.error = err;
+        this.books = null;
+      }
+    );
   }
 
 }

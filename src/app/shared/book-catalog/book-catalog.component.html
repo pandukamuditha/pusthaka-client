@@ -1,20 +1,19 @@
-<app-book-search></app-book-search>
+<app-book-search (searched)="search($event)" (categoryChanged)="changeCategory($event)"></app-book-search>
 
 <br>
 <br>
+<p *ngIf="error">{{ error.error }}</p>
 
 <div class="wrapper">
-  <mat-card *ngFor="let item of array">
+  <mat-card *ngFor="let book of books">
     <mat-card-title>
-      Book
+      {{ book.title }}
     </mat-card-title>
     <mat-card-subtitle>
-      Nice book.
+      {{ book.author }}
     </mat-card-subtitle>
     <mat-card-content>
       <img src="../../../assets/purple.png" alt="">
     </mat-card-content>
   </mat-card>
 </div>
-
-<div *ngIf="book">{{ book.title }}</div>
