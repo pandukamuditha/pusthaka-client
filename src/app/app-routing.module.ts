@@ -1,9 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, Router } from '@angular/router';
-import { NotFoundComponent } from './shared/not-found/not-found.component';
-import { AppComponent } from './app.component';
-import { BookCatalogComponent } from './shared/book-catalog/book-catalog.component';
 import { LoginComponent } from './shared/login/login.component';
+import { BookCatalogComponent } from './shared/book-catalog/book-catalog.component';
 
 const routes: Routes = [
   {
@@ -18,10 +16,6 @@ const routes: Routes = [
   {
     path: 'catalog',
     component: BookCatalogComponent
-  },
-  {
-    path: 'profile',
-    component: NotFoundComponent
   }
 ];
 
