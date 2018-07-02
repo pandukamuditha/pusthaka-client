@@ -9,6 +9,11 @@ const routes: Routes = [{
   component: PatronComponent,
   children: [
     {
+      path: '',
+      redirectTo: 'catalog',
+      pathMatch: 'full'
+    },
+    {
       path: 'catalog',
       component: BookCatalogComponent
     },

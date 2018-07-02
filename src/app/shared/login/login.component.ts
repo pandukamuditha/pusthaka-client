@@ -23,10 +23,16 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     this.authService.login(this.user).subscribe(
-      res => {
-        this.router.navigateByUrl('profile');
+      (res) => {
+        console.log(res);
+        if (res.userRole === 'admin') {
+          this.router.navigateByUrl('admin');
+        } else if (res.userRole === 'patron') {
+          console.log('Patron');
+          this.router.navigateByUrl('patron');
+        }
       },
-      error => {
+      (error) => {
         this.loginError = error;
       }
     );

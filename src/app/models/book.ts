@@ -4,5 +4,4 @@ export class Book {
     author: string;
     category: string;
     isbn: number;
-    copies: object;
 }

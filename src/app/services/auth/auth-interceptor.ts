@@ -13,7 +13,7 @@ export class AuthInterceptor implements HttpInterceptor {
     const token = this.authService.getToken();
 
     if (token) {
-      console.log('Token available');
+      console.log(this.authService.isLoggedIn());
       const request = req.clone(
         {
           setHeaders: {

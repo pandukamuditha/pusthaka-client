@@ -39,22 +39,33 @@ export class AuthService {
     );
   }
 
-  logout() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('expires_at');
-    localStorage.removeItem('role');
-  }
-
   setSession(sessionData) {
     const expiresAt = moment().add(sessionData.expiresIn, 'second');
 
     localStorage.setItem('token', sessionData.token);
-    localStorage.setItem('expires_at', expiresAt.toString());
-    localStorage.setItem('role', sessionData.role);
+    localStorage.setItem('expiresAt', expiresAt.toString());
+    localStorage.setItem('userRole', sessionData.userRole);
+    localStorage.setItem('userId', sessionData.userId);
+  }
+
+  logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('expiresAt');
+    localStorage.removeItem('userRole');
+    localStorage.removeItem('userId');
+
+    this.router.navigateByUrl('/');
   }
 
   getToken() {
     return localStorage.getItem('token');
+  }
+
+  getUserInfo() {
+    return {
+      userId: localStorage.getItem('userId'),
+      userRole: localStorage.getItem('userRole')
+    };
   }
 
   isLoggedIn() {
@@ -62,7 +73,7 @@ export class AuthService {
   }
 
   getTokenExpiration() {
-    const expiresAt = localStorage.getItem('expires_at');
+    const expiresAt = localStorage.getItem('expiresAt');
     return moment(expiresAt);
   }
 

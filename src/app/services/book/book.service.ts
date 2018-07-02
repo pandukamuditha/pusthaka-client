@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { retry } from 'rxjs/operators';
+import { retry, map } from 'rxjs/operators';
 import { Book } from '../../models/book';
+import { Copy } from '../../models/copy';
 
 const baseUrl = 'http://localhost:3000/api/books/';
 
@@ -13,8 +14,14 @@ export class BookService {
   constructor(private httpClient: HttpClient) { }
 
   getBook(id: string) {
-    return this.httpClient.get<Book>(baseUrl + id).pipe(
-      retry(3)
+    return this.httpClient.get<any>(baseUrl + id).pipe(
+      retry(3),
+      map((res) => {
+        return {
+          book: res['book'] as Book,
+          copies: res['copies'] as Copy[]
+        };
+      })
     );
   }
 

@@ -5,6 +5,7 @@ import { PatronRoutingModule } from './patron-routing.module';
 import { PatronComponent } from './patron.component';
 import { SharedModule } from '../shared/shared.module';
 import { BookDetailsComponent } from './book-details/book-details.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import { BookDetailsComponent } from './book-details/book-details.component';
   ],
   declarations: [
     PatronComponent,
-    BookDetailsComponent
+    BookDetailsComponent,
+    ProfileComponent
   ],
   exports: [
     PatronRoutingModule

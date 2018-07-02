@@ -1,0 +1,14 @@
+.book-available {
+    color: green;
+}
+
+.book-unavailable {
+    color: red;
+}
+
+mat-card-content > img {
+    width: 150px;
+    height: 200px;
+    border-right-width: 50px;
+    border-right-color: black;
+}

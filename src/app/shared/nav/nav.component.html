@@ -1,6 +1,6 @@
 <nav mat-tab-nav-bar>
   <div class="container">
-    <a mat-tab-link *ngFor="let link of navLinks" [routerLink]="link.url">
+    <a mat-tab-link *ngFor="let link of navLinks" [routerLink]="link.url" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">
       <mat-icon>{{ link.icon }}</mat-icon>
       <h4>
         {{ link.title }}
