@@ -1,3 +1,52 @@
-<p>
-  profile works!
-</p>
+<h3>Burrowed Books</h3>
+<table mat-table [dataSource]="burrowedBooks" matSort class="mat-elevation-z8">
+
+  <!-- Position Column -->
+  <ng-container matColumnDef="title">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Book </th>
+    <td mat-cell *matCellDef="let item"> {{item.copy.book.title}} </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="dueDate">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Due Date </th>
+    <td mat-cell *matCellDef="let item"> {{calculateDue(item.issuedDate) | date}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="fine">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Fine </th>
+    <td mat-cell *matCellDef="let item"> Rs. {{calculateFine(item.issuedDate)}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedLendingTableColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedLendingTableColumns;"></tr>
+</table>
+
+<br>
+<br>
+
+<h3>Reserved Books</h3>
+<table mat-table [dataSource]="reservations" matSort class="mat-elevation-z8">
+
+  <!-- Position Column -->
+  <ng-container matColumnDef="book">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Book </th>
+    <td mat-cell *matCellDef="let reservation"> {{reservation.book.title}} </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="date">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
+    <td mat-cell *matCellDef="let reservation"> {{reservation.createdAt | date}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+    <td mat-cell *matCellDef="let reservation">
+      <mat-icon (click)="deleteReservation(reservation._id)">delete</mat-icon>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedReservationTableColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedReservationTableColumns;"></tr>
+</table>

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -21,14 +22,41 @@ export class NavLinksService {
     {
       title: 'Catalog',
       icon: 'library_books',
-      url: ''
+      url: 'catalog'
+    },
+    {
+      title: 'Users',
+      icon: 'supervised_user_circle',
+      url: 'users'
+    },
+    {
+      title: 'Lendings',
+      icon: 'send',
+      url: 'lendings'
+    },
+    {
+      title: 'Reservations',
+      icon: 'lock',
+      url: 'reservations'
+    },
+    {
+      title: 'Requests',
+      icon: 'plus_one',
+      url: 'requests'
     }
   ];
 
-  constructor() { }
+  constructor(
+    private authService: AuthService
+  ) { }
 
   public getLinks() {
-    return this.Userlinks;
+    switch (this.authService.getUserInfo().userRole) {
+      case 'patron':
+        return this.Userlinks;
+      case 'admin':
+        return this.adminLinks;
+    }
   }
 }
 

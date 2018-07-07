@@ -13,7 +13,10 @@ import {
   MatGridListModule,
   MatCardModule,
   MatOptionModule,
-  MatSelectModule } from '@angular/material';
+  MatSelectModule,
+  MatTableModule,
+  MatSnackBarModule, 
+  MatDialogModule} from '@angular/material';
 
 @NgModule({
   imports: [
@@ -30,7 +33,10 @@ import {
     MatGridListModule,
     MatCardModule,
     MatOptionModule,
-    MatSelectModule
+    MatSelectModule,
+    MatTableModule,
+    MatSnackBarModule,
+    MatDialogModule
   ],
   exports: [
     CommonModule,
@@ -46,7 +52,10 @@ import {
     MatGridListModule,
     MatCardModule,
     MatOptionModule,
-    MatSelectModule
+    MatSelectModule,
+    MatTableModule,
+    MatSnackBarModule,
+    MatDialogModule
   ],
   declarations: []
 })

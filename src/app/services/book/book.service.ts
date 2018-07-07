@@ -47,4 +47,16 @@ export class BookService {
         retry(5)
       );
   }
+
+  addCopy(book: Book) {
+    return this.httpClient.post<Copy>(baseUrl + 'copy', { book: book._id }).pipe(
+      retry(3)
+    );
+  }
+
+  deleteCopy(copy: Copy) {
+    return this.httpClient.delete<Copy>(baseUrl + 'copy/' + copy._id).pipe(
+      retry(3)
+    );
+  }
 }

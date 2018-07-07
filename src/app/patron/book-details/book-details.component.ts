@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { BookService } from '../../services/book/book.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Book } from '../../models/book';
-import { pipe } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { Copy } from '../../models/copy';
 import { ReservationService } from '../../services/reservation/reservation.service';
 import { AuthService } from '../../services/auth/auth.service';
@@ -15,13 +13,14 @@ import { Reservation } from '../../models/reservation';
   styleUrls: ['./book-details.component.css']
 })
 export class BookDetailsComponent implements OnInit {
-  selectedId: string;
+  selectedBookId: string;
   book = new Book();
   copies: Array<Copy> = [];
-  availableCopy: Copy;
 
-  reservations: Reservation[];
+  bookReservations: Reservation[];
+  userReservations: Reservation[];
   canReserve: boolean;
+  isAvailable: boolean;
   reserveError = '';
 
   constructor(
@@ -33,34 +32,52 @@ export class BookDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(
-      (params) => { this.selectedId = params.id; }
+      (params) => { this.selectedBookId = params.id; }
     );
     this.getBook();
-    this.getReservations();
+    this.getUserReservations();
   }
 
   getBook() {
-    this.bookService.getBook(this.selectedId).subscribe(
+    this.bookService.getBook(this.selectedBookId).subscribe(
       (data) => {
         this.book = data.book;
         this.copies = data.copies;
+      },
+      (err) => { },
+      () => {
+        this.getBookReservations();
+      }
+    );
+  }
+
+  getBookReservations() {
+    this.reservationService.getValidBookReservations(this.selectedBookId).subscribe(
+      (reservations) => {
+        this.bookReservations = reservations;
+      },
+      (err) => false,
+      () => {
+        this.getAvailability();
       }
     );
   }
 
   getAvailability() {
+    let count = 0;
     for (const copy of this.copies) {
       if (copy.isAvailable) {
-        this.availableCopy = copy;
-        return true;
+        count++;
       }
     }
+    count -= this.bookReservations.length;
+    this.isAvailable = (count > 0);
   }
 
-  getReservations() {
-    this.reservationService.getUserReservations(this.authService.getUserInfo().userId).subscribe(
+  getUserReservations() {
+    this.reservationService.getValidUserReservations(this.authService.getUserInfo().userId).subscribe(
       (reservations) => {
-        this.reservations = reservations;
+        this.userReservations = reservations;
       },
       (err) => {
 
@@ -72,16 +89,18 @@ export class BookDetailsComponent implements OnInit {
   }
 
   getReservability() {
-    if (this.reservations.length === 2) {
+    if (this.userReservations.length === 2) {
       this.reserveError = 'You have already reserved 2 books.';
       this.canReserve = false;
     }
-    if (this.reservations.length > 0) {
-      for (const reservation of this.reservations) {
-        if (reservation.book === this.selectedId) {
+    if (this.userReservations.length > 0) {
+      for (const reservation of this.userReservations) {
+        if (reservation.book._id === this.selectedBookId) {
           this.reserveError = 'You have reserved this book.';
           this.canReserve = false;
+          break;
         }
+        this.canReserve = true;
       }
     } else {
       this.canReserve = true;
@@ -89,9 +108,10 @@ export class BookDetailsComponent implements OnInit {
   }
 
   reserveCopy() {
-    this.reservationService.reserveBook(this.availableCopy).subscribe(
+    console.log(this.selectedBookId);
+    this.reservationService.reserveBook(this.selectedBookId).subscribe(
       (res) => {
-        this.getReservations();
+        this.getUserReservations();
       },
       (err) => {
         console.log(err);

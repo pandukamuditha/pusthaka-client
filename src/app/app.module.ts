@@ -6,17 +6,10 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
-import { MaterialComponentsModule } from './material-components.module';
-import { MainToolbarComponent } from './shared/main-toolbar/main-toolbar.component';
-import { NavComponent } from './shared/nav/nav.component';
-import { BookCatalogComponent } from './shared/book-catalog/book-catalog.component';
-import { NotFoundComponent } from './shared/not-found/not-found.component';
-import { BookSearchComponent } from './shared/book-search/book-search.component';
-import { LoginComponent } from './shared/login/login.component';
-import { FormsModule } from '@angular/forms';
 import { AuthInterceptor } from './services/auth/auth-interceptor';
 import { PatronModule } from './patron/patron.module';
 import { SharedModule } from './shared/shared.module';
+import { AdminModule } from './admin/admin.module';
 
 @NgModule({
   declarations: [
@@ -27,6 +20,7 @@ import { SharedModule } from './shared/shared.module';
     BrowserAnimationsModule,
     SharedModule,
     PatronModule,
+    AdminModule,
     AppRoutingModule
   ],
   providers: [

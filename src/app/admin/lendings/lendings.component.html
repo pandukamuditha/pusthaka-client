@@ -1,0 +1,36 @@
+<mat-form-field>
+  <mat-label>Lending Type</mat-label>
+  <mat-select placeholder="Lending Type" name="item" (valueChange)="onTypeChange($event)">
+    <mat-option *ngFor="let type of types" [value]="type.value">
+      {{type.view}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<table mat-table [dataSource]="lendings" matSort class="mat-elevation-z8">
+
+  <!-- Position Column -->
+  <ng-container matColumnDef="title">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Book </th>
+    <td mat-cell *matCellDef="let item"> {{item.copy.book.title}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="burrower">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Burrower </th>
+      <td mat-cell *matCellDef="let item"> {{item.user.name}} </td>
+    </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="dueDate">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Due Date </th>
+    <td mat-cell *matCellDef="let item"> {{calculateDue(item.issuedDate) | date}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="fine">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Fine </th>
+    <td mat-cell *matCellDef="let item"> Rs. {{calculateFine(item.issuedDate)}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedLendingTableColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedLendingTableColumns;"></tr>
+</table>

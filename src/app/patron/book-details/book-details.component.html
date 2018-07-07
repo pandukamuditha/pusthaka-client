@@ -20,9 +20,9 @@
             </div>
             <div class="col-sm-5 align-self-center book-control">
               <mat-card-content>
-                <h3 class="book-available" *ngIf="getAvailability()">Book Available</h3>
-                <h3 class="book-unavailable" *ngIf="!getAvailability()">Book Not Available</h3>
-                <button mat-raised-button [disabled]="!canReserve || !getAvailability()" (click)="reserveCopy()">Reserve Book</button>
+                <h3 class="book-available" *ngIf="isAvailable">Book Available</h3>
+                <h3 class="book-unavailable" *ngIf="!isAvailable">Book Not Available</h3>
+                <button mat-raised-button [disabled]="!canReserve || !isAvailable" (click)="reserveCopy()">Reserve Book</button>
                 <h3 *ngIf="reserveError">{{ reserveError }}</h3>
               </mat-card-content>
             </div>
